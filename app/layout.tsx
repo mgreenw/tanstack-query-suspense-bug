@@ -1,9 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClientProviders } from "./ClientProviders";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export const fetchCache = "default-no-store";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,9 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ClientProviders>{children}</ClientProviders>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

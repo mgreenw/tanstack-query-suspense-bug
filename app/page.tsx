@@ -1,16 +1,19 @@
 "use client";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { fetchData } from "./data-fetching";
+
+const dataFetch = fetchData("http://localhost:3000/api/health");
 
 export default function Home() {
-  // HELP: this query refetches over and over again, but the component itself doesn't re-render
-  const query = useSuspenseQuery({
-    queryKey: ["health"],
-    queryFn: async () => {
-      const res = await fetch("http://localhost:3000/api/health");
-      return await res.json();
-    },
-  });
+  const data = dataFetch.read();
 
-  return <div>Status: {query.data.status}</div>;
+  return (
+    <div>
+      <h3>
+        Status: {data.status}, Wait: {data.wait}
+      </h3>
+      <Link href="/page2">Page 2</Link>
+    </div>
+  );
 }

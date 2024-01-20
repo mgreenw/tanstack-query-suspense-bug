@@ -9,10 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@tanstack/react-query": "5.0.0-rc.4",
-    "next": "13.5.4",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "^14",
+    "react": "canary",
+    "react-dom": "canary"
   },
   "devDependencies": {
     "@types/node": "^20",
