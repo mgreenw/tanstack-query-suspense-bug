@@ -1,4 +1,8 @@
-## Tanstack Query Suspense Refetch Bug
+## Example Next.js App Dir Data Fetching With No Defined Suspense Boundaries
+
+This example demonstrates how data fetching with suspense works in the Next.js app router when no manual suspense boundaries are defined (either with `loading.tsx` or `<Suspense>`). By default, when no boundaries are defined, Next.js will block the streaming SSR until the data is fetched, and on the client side will also block client navigation on page change until the data is fetched.
+
+This example is meant to aid in discussion related to [this `@tanstack/query`` issue](https://github.com/TanStack/query/issues/6116).
 
 First, run the development server:
 
@@ -7,8 +11,8 @@ pnpm i
 pnpm dev
 ```
 
-Go to `http://localhost:3000`. The page will load just fine, but go to the network tab of the dev console in your browser. You will notice requests to `/api/health` recurring every couple of milliseconds.
+Things to try:
 
-I intentionally did not include a `loading.ts` file because I prefer the behavior where it waits for the data to fetch on the server before rendering.
-
-It is unclear if this is an issue with Next.js or `@tanstack/router`.
+1. Load `/` directly and watch the SSR block for 3s while the data is fetched
+2. Load `/page2` and then navigate to this page by clicking the link. The navigation will be blocked
+   for 3s while the data is fetched, and then this page will display.
